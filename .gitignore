@@ -1,0 +1,7 @@
+**/*
+!.vscode/
+!pipelines/
+!scripts/
+!.artifactignore
+!README.md
+!run_owasp_scanner.sh

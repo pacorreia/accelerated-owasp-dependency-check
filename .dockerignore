@@ -1,0 +1,3 @@
+**/*
+!scripts/
+!run_owasp_scanner.sh
