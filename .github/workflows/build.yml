@@ -26,9 +26,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Docker image exists
+        id: lastestDockerImage
         # You may pin to the exact commit or the version.
         # uses: cloudposse/github-action-docker-image-exists@3a691104a3d105aecb95e17e8ac5f21d271e53be
         uses: cloudposse/github-action-docker-image-exists@0.1.2
+        continue-on-error: true
         with:
           # Organization
           organization: pfmc82
@@ -40,3 +42,8 @@ jobs:
           image_name: pfmc82/odc_cached 
           # Tag
           tag: latest
+          
+      - name: Run script
+        if: steps.latestDockerImage.outcome != 'success'
+        run: |
+          echo failed
