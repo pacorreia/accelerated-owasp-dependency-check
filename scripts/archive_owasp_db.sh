@@ -21,7 +21,7 @@ if [ ! -e "${owasp_dir}" ]; then
 fi
 
 # Check there's a database in data folder
-if ! find "${db_path}" -name "*.db" -print -quit | grep -q .; then
+if [ -z "$(find "${db_path}" -name "*.db" -print -quit)" ]; then
     echo "[ERROR] There's no H2 database present to be archived!"
     exit 1
 fi

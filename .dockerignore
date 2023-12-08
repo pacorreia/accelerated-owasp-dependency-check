@@ -1,3 +1,4 @@
 **/*
 !scripts/
 !run_owasp_scanner.sh
+!owasp_db.tar.gz

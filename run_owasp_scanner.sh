@@ -21,11 +21,12 @@ db_path="${owasp_dir}/data"
 scanner_path="${owasp_dir}/bin/dependency-check.sh"
 
 # If there's not database yet, unarchive it
-if ! find "${db_path}" -name "*.db" -print -quit > /dev/null 2>&1; then
+if [ -z "$(find "${db_path}" -name "*.db" -print -quit)" ]; then
 
     "${base_dir}/scripts/unarchive_owasp_db.sh"
 
 fi
 
 # Execute OWASP scanner using input arguments and without doing database updates
+# shellcheck disable=SC2086
 ${scanner_path} ${scan_arguments} -n

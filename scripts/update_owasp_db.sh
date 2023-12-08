@@ -16,16 +16,13 @@ db_path="${owasp_dir}/data"
 scanner_path="${owasp_dir}/bin/dependency-check.sh"
 nvdApiKey="$1"
 
-echo ${nvdApiKey}
-
-
 find . -type f -name "*.sh" -exec chmod +x {} \;
 
 # Get current script version to determine if the NVD API key is needed
 version_requiring_nvd="9.0.0"
 current_version=$($scanner_path -v | awk '{ print $4 }')
 
-if [ -e "${base_dir}/owasp_db.tar.gz" ] && ! find "${db_path}" -name "*.db" -print -quit 2>/dev/null; then
+if [ -e "${base_dir}/owasp_db.tar.gz" ] && [ -z "$(find "${db_path}" -name "*.db" -print -quit)" ]; then
     echo "[INFO] Found previous H2 database!"
     echo "[INFO] Unarchiving H2 database to avoid full update."
     "$base_dir/scripts/unarchive_owasp_db.sh"
